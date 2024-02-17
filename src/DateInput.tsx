@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { format } from "date-fns";
-import { loadLocale } from "./utils/loadLocale";
+import { Locale, format } from "date-fns";
+// import { loadLocale } from "./utils/loadLocale";
+import locale from "./utils/external/local/index.mjs";
 
 export const DateInput: React.FC = () => {
   const [date, setDate] = useState<string>("");
@@ -13,9 +14,9 @@ export const DateInput: React.FC = () => {
 
     if (inputDate) {
       setLocaleCode(process.env.APP_LOCALE || "en-US");
-      const localeData = await loadLocale(localeCode);
+      // const localeData = await loadLocale(localeCode);
       const formatted = format(new Date(inputDate), "PP", {
-        locale: localeData,
+        locale: locale as Locale,
       });
       setFormattedDate(formatted);
     } else {
